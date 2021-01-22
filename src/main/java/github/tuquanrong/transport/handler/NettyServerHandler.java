@@ -4,29 +4,34 @@ import github.tuquanrong.model.constant.PackageConstant;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
+import github.tuquanrong.proxy.ServerProxy;
 import github.tuquanrong.util.ResponseState;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * tutu
  * 2021/1/6
  */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
+    private ServerProxy serverProxy;
+
+    public NettyServerHandler() {
+        serverProxy = ServerProxy.getInstance();
+    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println("serverHandler");
         try {
             if (msg instanceof MessageDto) {
                 MessageDto messageDto = (MessageDto) msg;
-                System.out.println(messageDto);
                 MessageDto responseMessage = new MessageDto();
                 if (messageDto.getMessageType() == PackageConstant.RequestPackage) {
                     RequestDto requestDto = (RequestDto) messageDto.getData();
-                    Object data = new Object();//通过requestDto中的参数调用函数
+                    Object data = serverProxy.invoke(requestDto);//通过requestDto中的参数调用函数
                     responseMessage.setVersion(messageDto.getVersion());
                     responseMessage.setSerializationType(messageDto.getSerializationType());
                     responseMessage.setMessageType(PackageConstant.ResposnePackage);

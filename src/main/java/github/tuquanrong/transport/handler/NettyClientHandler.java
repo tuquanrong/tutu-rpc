@@ -14,7 +14,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     private UnDealMessage unDealMessage;
 
     public NettyClientHandler() {
-        unDealMessage = new UnDealMessage();
+        unDealMessage = UnDealMessage.getInstance();
     }
 
     @Override

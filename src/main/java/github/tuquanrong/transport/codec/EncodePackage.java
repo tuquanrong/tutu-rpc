@@ -18,10 +18,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class EncodePackage extends MessageToByteEncoder<MessageDto> {
     private static final AtomicInteger atomicInteger = new AtomicInteger(1);
+    private Serializer serializer;
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, MessageDto messageDto, ByteBuf out) throws Exception {
-        System.out.println("encode"+messageDto);
         out.writeBytes(PackageConstant.MagicNumber);
         out.writerIndex(out.writerIndex() + 4);
         out.writeByte(PackageConstant.BetaVersion);
@@ -29,9 +29,8 @@ public class EncodePackage extends MessageToByteEncoder<MessageDto> {
         out.writeByte(messageDto.getMessageType());
         out.writeInt(atomicInteger.getAndIncrement());
 
-        Serializer serializer = null;
         if (messageDto.getSerializationType() == PackageConstant.ProtostufSerializer) {
-            serializer = new ProtostuffSerializer();
+            serializer = ProtostuffSerializer.getInstance();
         }
         byte[] dataBytes = serializer.serialize(messageDto.getData());
         out.writeBytes(dataBytes);

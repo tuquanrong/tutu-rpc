@@ -1,27 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01bc02b6-792c-4c83-90c7-89aacf7b3c6a" name="Default Changelist" comment="" />
+    <list default="true" id="30b28092-dd76-469c-88e8-18e763151d86" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_16_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_7_0_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jline_jline_0_9_94.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_client_2_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_framework_2_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_recipes_2_13_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_4_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/config/PropertiesConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/exception/BeanRpcException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/ClientGenerate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/ServerGenerate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanDirectoryImport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanDirectoryScan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanProxyGenerate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/loadbalance/ConsistenceHashLoadBalance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/loadbalance/ServerLoadBalance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/proxy/ClientProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/proxy/ServerProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServerDiscover.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServerRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServiceBeans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ZkController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ZkShutdownHook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/generate/scan/NettyClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/loadbalance/ConsistenceHashLoadBalanceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/proxy/ServerProxyTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/register/ServerDiscoverTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/register/ServerRegisterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkstyle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/项目进度.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/项目进度.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/model/enums/CodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/model/enums/CodeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/serializer/ProtostuffSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/serializer/ProtostuffSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/UnDealMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/UnDealMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/DecodePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/DecodePackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/EncodePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/EncodePackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/github/tuquanrong/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/tutu-rpc.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/exception/RpcException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/constant/PackageConstant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/MessageDto$MessageDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/MessageDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/RequestDto$RequestDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/RequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/ResponseDto$ResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/ResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/enums/CodeEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/serializer/ProtostuffSerializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/serializer/Serializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyServer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/UnDealMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/codec/DecodePackage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/codec/EncodePackage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/handler/NettyClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/handler/NettyServerHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/util/ResponseState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/tutu-rpc.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/AppTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/serializer/ProtoStuffSerializerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/serializer/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/NettyClientTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/NettyServerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/codec/DecodePackageTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/codec/EncodePackageTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutu-rpc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tutu-rpc.iml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="1mwxMMjlIabWcKbnHTusaLJJ18t" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1n1Hy9hjZU5no2nkMAnCes03lUn" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.externalDependencies" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="github.tuquanrong.Register" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -35,13 +137,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.NettyClientTest">
-    <configuration name="NettyClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.transport.NettyClientTest" />
+  <component name="RunManager" selected="Application.ConsistenceHashLoadBalanceTest">
+    <configuration name="ConsistenceHashLoadBalanceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.loadbalance.ConsistenceHashLoadBalanceTest" />
       <module name="tutu-rpc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="github.tuquanrong.transport.*" />
+          <option name="PATTERN" value="github.tuquanrong.loadbalance.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -49,12 +151,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NettyServerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.transport.NettyServerTest" />
+    <configuration name="NetUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.register.NetUtil" />
       <module name="tutu-rpc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="github.tuquanrong.transport.*" />
+          <option name="PATTERN" value="github.tuquanrong.register.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NettyClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.generate.scan.NettyClient" />
+      <module name="tutu-rpc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="github.tuquanrong.generate.scan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerDiscoverTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.register.ServerDiscoverTest" />
+      <module name="tutu-rpc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="github.tuquanrong.register.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerRegisterTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="github.tuquanrong.register.ServerRegisterTest" />
+      <module name="tutu-rpc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="github.tuquanrong.register.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -64,8 +205,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NettyClientTest" />
-        <item itemvalue="Application.NettyServerTest" />
+        <item itemvalue="Application.ConsistenceHashLoadBalanceTest" />
+        <item itemvalue="Application.ServerDiscoverTest" />
+        <item itemvalue="Application.NetUtil" />
+        <item itemvalue="Application.ServerRegisterTest" />
+        <item itemvalue="Application.NettyClient" />
       </list>
     </recent_temporary>
   </component>
@@ -74,18 +218,50 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="01bc02b6-792c-4c83-90c7-89aacf7b3c6a" name="Default Changelist" comment="" />
-      <created>1610418405326</created>
+      <changelist id="30b28092-dd76-469c-88e8-18e763151d86" name="Default Changelist" comment="" />
+      <created>1610550929073</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1610418405326</updated>
-      <workItem from="1610418406601" duration="2106000" />
-      <workItem from="1610424192259" duration="198000" />
-      <workItem from="1610442329033" duration="267000" />
+      <updated>1610550929073</updated>
+      <workItem from="1610550931989" duration="1573000" />
+      <workItem from="1610675428314" duration="4208000" />
+      <workItem from="1610701183266" duration="9017000" />
+      <workItem from="1610880965042" duration="3117000" />
+      <workItem from="1610887224121" duration="468000" />
+      <workItem from="1610887700722" duration="11000" />
+      <workItem from="1610887880258" duration="967000" />
+      <workItem from="1610938182332" duration="45483000" />
+      <workItem from="1611286927979" duration="22000" />
+      <workItem from="1611289657305" duration="1494000" />
+      <workItem from="1611291172020" duration="261000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/github/tuquanrong/loadbalance/ConsistenceHashLoadBalanceTest.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

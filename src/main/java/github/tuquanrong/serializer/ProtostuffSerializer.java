@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ProtostuffSerializer implements Serializer {
+    private static final ProtostuffSerializer PROTOSTUFF_SERIALIZER = new ProtostuffSerializer();
     /**
      * 避免每次序列化都重新申请Buffer空间
      */
@@ -18,6 +19,10 @@ public class ProtostuffSerializer implements Serializer {
      * 缓存Schema
      */
     private static Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<Class<?>, Schema<?>>();
+
+    public static ProtostuffSerializer getInstance() {
+        return PROTOSTUFF_SERIALIZER;
+    }
 
     /**
      * 序列化方法，把指定对象序列化成字节数组

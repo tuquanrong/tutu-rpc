@@ -1,5 +1,6 @@
 package github.tuquanrong.transport;
 
+import github.tuquanrong.register.ZkShutdownHook;
 import github.tuquanrong.transport.codec.DecodePackage;
 import github.tuquanrong.transport.codec.EncodePackage;
 import github.tuquanrong.transport.handler.NettyServerHandler;
@@ -18,38 +19,40 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class NettyServer {
-    private final int port = 9085;
+    public final static int PORT = 9085;
     private ServerBootstrap serverBootstrap;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;
     private DefaultEventExecutorGroup eventExecutorGroup;
 
-    NettyServer() {
+    public NettyServer() {
         serverBootstrap = new ServerBootstrap();
         bossGroup = new NioEventLoopGroup(1);
         workGroup = new NioEventLoopGroup();
         eventExecutorGroup = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
-        serverBootstrap
-                .group(bossGroup, workGroup)
-                .channel(NioServerSocketChannel.class)
-                .option(ChannelOption.TCP_NODELAY, true)
-                .option(ChannelOption.SO_BACKLOG, 128)
-                .option(ChannelOption.SO_KEEPALIVE, true)
-                .childHandler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        ChannelPipeline channelPipeline = socketChannel.pipeline();
-                        channelPipeline.addLast(new EncodePackage());
-                        channelPipeline.addLast(new DecodePackage());
-                        channelPipeline.addLast(eventExecutorGroup, new NettyServerHandler());
-                    }
-                });
     }
 
     public void start() {
         try {
+            ZkShutdownHook.clearServiceNode();
             String ip = InetAddress.getLocalHost().getHostAddress();
-            ChannelFuture channelFuture = serverBootstrap.bind(ip, port).sync();
+            serverBootstrap
+                    .group(bossGroup, workGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY, true)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .option(ChannelOption.SO_KEEPALIVE, true)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                            ChannelPipeline channelPipeline = socketChannel.pipeline();
+                            channelPipeline.addLast(new EncodePackage());
+                            channelPipeline.addLast(new DecodePackage());
+                            channelPipeline.addLast(eventExecutorGroup, new NettyServerHandler());
+                        }
+                    });
+            System.out.println(ip + "  " + PORT);
+            ChannelFuture channelFuture = serverBootstrap.bind(ip, PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (UnknownHostException | InterruptedException e) {
             e.printStackTrace();

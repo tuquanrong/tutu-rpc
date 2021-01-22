@@ -20,6 +20,8 @@ import java.util.List;
  * 2021/1/6
  */
 public class DecodePackage extends LengthFieldBasedFrameDecoder {
+    private Serializer serializer;
+
     public DecodePackage() {
         this(PackageConstant.PackageMaxLength, 4, 4, -8, 0);
     }
@@ -37,7 +39,6 @@ public class DecodePackage extends LengthFieldBasedFrameDecoder {
 
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
-        System.out.println("decode");
         Object message = super.decode(ctx, in);
         if (message instanceof ByteBuf) {
             ByteBuf byteBuf = (ByteBuf) message;
@@ -69,7 +70,9 @@ public class DecodePackage extends LengthFieldBasedFrameDecoder {
         messageDto.setSerializationType(serializationType);
         messageDto.setRequestId(requestId);
         messageDto.setMessageType(messageType);
-        Serializer serializer = new ProtostuffSerializer();
+        if (messageDto.getSerializationType() == PackageConstant.ProtostufSerializer) {
+            serializer = ProtostuffSerializer.getInstance();
+        }
         if (messageType == PackageConstant.RequestPackage) {
             messageDto.setData(serializer.deserialize(dataBytes, RequestDto.class));
         } else if (messageType == PackageConstant.ResposnePackage) {
