@@ -2,91 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30b28092-dd76-469c-88e8-18e763151d86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_16_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_7_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jline_jline_0_9_94.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_client_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_framework_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_recipes_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_4_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/config/PropertiesConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/exception/BeanRpcException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/ClientGenerate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/ServerGenerate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanDirectoryImport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanDirectoryScan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/generate/scan/BeanProxyGenerate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/loadbalance/ConsistenceHashLoadBalance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/loadbalance/ServerLoadBalance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/proxy/ClientProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/proxy/ServerProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServerDiscover.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServerRegister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ServiceBeans.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ZkController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/register/ZkShutdownHook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/generate/scan/NettyClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/loadbalance/ConsistenceHashLoadBalanceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/proxy/ServerProxyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/register/ServerDiscoverTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/register/ServerRegisterTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkstyle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/项目进度.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/项目进度.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/model/enums/CodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/model/enums/CodeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/serializer/ProtostuffSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/serializer/ProtostuffSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/UnDealMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/UnDealMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/DecodePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/DecodePackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/EncodePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/codec/EncodePackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/github/tuquanrong/transport/handler/NettyServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/github/tuquanrong/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/github/tuquanrong/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/tutu-rpc.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/exception/RpcException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/constant/PackageConstant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/MessageDto$MessageDtoBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/MessageDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/RequestDto$RequestDtoBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/RequestDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/ResponseDto$ResponseDtoBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/dto/ResponseDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/model/enums/CodeEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/serializer/ProtostuffSerializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/serializer/Serializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyClient$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyServer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/NettyServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/UnDealMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/codec/DecodePackage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/codec/EncodePackage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/handler/NettyClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/transport/handler/NettyServerHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/github/tuquanrong/util/ResponseState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/tutu-rpc.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/AppTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/serializer/ProtoStuffSerializerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/serializer/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/NettyClientTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/NettyServerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/codec/DecodePackageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/github/tuquanrong/transport/codec/EncodePackageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutu-rpc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tutu-rpc.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +39,9 @@
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="github.tuquanrong.Register" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -233,7 +152,7 @@
       <workItem from="1610938182332" duration="45483000" />
       <workItem from="1611286927979" duration="22000" />
       <workItem from="1611289657305" duration="1494000" />
-      <workItem from="1611291172020" duration="261000" />
+      <workItem from="1611291172020" duration="1344000" />
     </task>
     <servers />
   </component>
