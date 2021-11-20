@@ -2,23 +2,17 @@ package github.tuquanrong.transport.codec;
 
 import github.tuquanrong.model.constant.PackageConstant;
 import github.tuquanrong.model.dto.MessageDto;
-import github.tuquanrong.model.dto.RequestDto;
-import github.tuquanrong.serializer.ProtostuffSerializer;
+import github.tuquanrong.model.enums.SerializerEnum;
 import github.tuquanrong.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * tutu
  * 2021/1/6
  */
 public class EncodePackage extends MessageToByteEncoder<MessageDto> {
-    private static final AtomicInteger atomicInteger = new AtomicInteger(1);
-    private Serializer serializer;
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, MessageDto messageDto, ByteBuf out) throws Exception {
@@ -27,12 +21,13 @@ public class EncodePackage extends MessageToByteEncoder<MessageDto> {
         out.writeByte(PackageConstant.BetaVersion);
         out.writeByte(messageDto.getSerializationType());
         out.writeByte(messageDto.getMessageType());
-        out.writeInt(atomicInteger.getAndIncrement());
+        out.writeBytes(messageDto.getRequestId().getBytes());
 
-        if (messageDto.getSerializationType() == PackageConstant.ProtostufSerializer) {
-            serializer = ProtostuffSerializer.getInstance();
-        }
+        Serializer serializer = (Serializer) SerializerEnum
+                .fromValue(messageDto.getSerializationType()).getDealClass().getMethod("getInstance").invoke(null);
+
         byte[] dataBytes = serializer.serialize(messageDto.getData());
+        System.out.println("serializer" + dataBytes + messageDto.getData());
         out.writeBytes(dataBytes);
 
         int packageLength = out.writerIndex();

@@ -1,6 +1,11 @@
 package github.tuquanrong.register;
 
-import github.tuquanrong.config.PropertiesConfig;
+import java.net.InetSocketAddress;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
@@ -10,11 +15,9 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 
-import java.net.InetSocketAddress;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import github.tuquanrong.config.PropertiesConfig;
+import github.tuquanrong.exception.RpcServerException;
+import github.tuquanrong.model.enums.RpcServerStatusEnum;
 
 /**
  * tutu
@@ -23,7 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ZkController {
     public static final String ZK_RPC_LINK = "/tutu-rpc";
-    private String DEFAULT_ZK_HOST = "127.0.0.1:2181";
+    @SuppressWarnings("checkstyle:StaticVariableName")
+    private static String DEFAULT_ZK_HOST = "127.0.0.1:2181";
     private static final ZkController ZK_CONTROLLER = new ZkController();
     private PropertiesConfig propertiesConfig;
     private CuratorFramework zkClient;
@@ -42,7 +46,7 @@ public class ZkController {
         if (zkClient != null && zkClient.getState() == CuratorFrameworkState.STARTED) {
             return zkClient;
         }
-        DEFAULT_ZK_HOST = PropertiesConfig.getInstance().get("zk", "127.0.0.1:2181");
+        DEFAULT_ZK_HOST = PropertiesConfig.getInstance().get(PropertiesConfig.PropertiesEnum.ZOOKEEPER);
         zkClient = CuratorFrameworkFactory.builder()
                 .connectString(DEFAULT_ZK_HOST)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
@@ -59,7 +63,10 @@ public class ZkController {
             } else {
                 client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
             }
-            pathContiner.add(path);
+            boolean status = pathContiner.add(path);
+            if (status == Boolean.FALSE) {
+                throw new RpcServerException(RpcServerStatusEnum.REGISTER_FAIL);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

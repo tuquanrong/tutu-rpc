@@ -1,11 +1,12 @@
 package github.tuquanrong.proxy;
 
-import github.tuquanrong.register.ServiceBeans;
-import github.tuquanrong.exception.RpcException;
-import github.tuquanrong.model.dto.RequestDto;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import github.tuquanrong.exception.RpcServerException;
+import github.tuquanrong.model.dto.RequestDto;
+import github.tuquanrong.model.enums.RpcServerStatusEnum;
+import github.tuquanrong.register.ServiceBeans;
 
 /**
  * tutu
@@ -29,9 +30,11 @@ public class ServerProxy {
         try {
             Class interfaceName = Class.forName(requestDto.getInterfaceName());
             Method method1 = interfaceName.getMethod(requestDto.getMethodName(), requestDto.getMethodParamType());
+            System.out.println("one" + method1);
             Object service = serviceBeans.getService(interfaceName.getName());
+            System.out.println("two" + service);
             if (service == null) {
-                throw new RpcException("找不到相应的方法");
+                throw new RpcServerException(RpcServerStatusEnum.NO_DISCOVER_SERVER);
             }
             data = method1.invoke(service, requestDto.getParams());
         } catch (ClassNotFoundException | NoSuchMethodException e) {

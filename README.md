@@ -10,18 +10,21 @@
 
 ### 待优化模块
 
-- [ ] 服务提供强依赖于Spring需要通过注解导入服务bean这一部分需要使用者显式处理，应该对这部分再封装隐藏起来
-- [ ] 使用**SimpleChannelInboundHandler**替代**ChannelInboundHandlerAdapter**使得channelHandler可以热抽拔
 - [ ] 客户端断开连接时服务端没有把对应的通道关闭缺乏心跳机制
-
-### 待解决Bug
-
-- [ ] 服务端启动时有java.net.BindException: Can't assign requested address错误
+- [ ] 通过sentinel引入流量控制能力（熔断、限流）
+- [ ] 实现金丝雀、蓝绿、ab发布能力
+- [ ] 接入本地缓存提高注册中心的容错性
 
 ### 使用方式
 
+**框架启动注解**
+
+1. @TutuServiceMark
+2. @TutuRpcStartup
+
 ```java
 //创建中间文件
+@TutuServiceMark
 public interface HelloService {
     String hello(String name);
 }
@@ -29,9 +32,8 @@ public interface HelloService {
 
 ```java
 //创建服务方实现文件
-@ServerGenerate
 @Component
-public class HelloServer implements HelloService {
+public class HelloServerImpl implements HelloService {
     @Override
     public String hello(String name) {
         return name+"tututu";
@@ -43,34 +45,43 @@ public class HelloServer implements HelloService {
 //创建客户端使用文件
 @Component
 public class HelloClient {
-    @ClientGenerate
+    @Autowired
     private HelloService helloService;
     public String test(String name){
         return helloService.hello(name);
     }
 }
-
 ```
 
 ```java
 //服务端启动
-@BeanScan(scanDir = "tuturpc")
+@TutuRpcStartup
+@SpringBootApplication
 public class RpcServer {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(RpcServer.class);
+        SpringApplication.run(RpcServer.class,args);
         PropertiesConfig propertiesConfig=PropertiesConfig.getInstance();
         NettyServer nettyServer=new NettyServer();
         nettyServer.start();
     }
 }
 //客户端启动
-@BeanScan(scanDir ={"tuturpc"})
+@TutuRpcStartup
+@SpringBootApplication
 public class RpcClient {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(RpcClient.class);
-        HelloClient helloClient = (HelloClient) applicationContext.getBean("helloClient");
-        System.out.println(helloClient.test("test"));
+        SpringApplication.run(RpcClient.class, args);
+     System.out.println(((HelloClient)SpringContextUtil.getBean("helloClient")).test("test"));
     }
 }
+```
+
+**框架启动配置**
+
+放在resources下tutuRPc.properties文件
+
+```properties
+serializer=1
+zk=127.0.0.1:2181
 ```
 

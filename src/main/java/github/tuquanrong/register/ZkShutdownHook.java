@@ -1,10 +1,10 @@
 package github.tuquanrong.register;
 
-import github.tuquanrong.transport.NettyServer;
-
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+
+import github.tuquanrong.transport.NettyServer;
 
 /**
  * tutu
@@ -15,7 +15,7 @@ public class ZkShutdownHook {
     public static void clearServiceNode() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                ZkController.getInstance().clearAllNode(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), NettyServer.PORT));
+                ZkController.getInstance().clearAllNode(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), NettyServer.getPort()));
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }

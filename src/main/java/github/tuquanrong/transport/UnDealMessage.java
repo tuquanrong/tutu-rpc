@@ -1,10 +1,10 @@
 package github.tuquanrong.transport;
 
-import github.tuquanrong.model.dto.ResponseDto;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+
+import github.tuquanrong.model.dto.ResponseDto;
 
 /**
  * tutu
@@ -22,10 +22,18 @@ public class UnDealMessage {
         map.put(requestId, completableFuture);
     }
 
+    /**
+     * 把结果给客户端代理，由代理转发给上层
+     *
+     * @param responseDto
+     */
     public void dealRequestId(ResponseDto responseDto) {
         CompletableFuture<ResponseDto> completableFuture = map.get(responseDto.getResponseId());
         if (completableFuture != null) {
+            System.out.println("dealRequestId.responseDto" + responseDto);
             completableFuture.complete(responseDto);
+        } else {
+            System.out.println("failDeal");
         }
     }
 }

@@ -3,6 +3,7 @@ package github.tuquanrong.transport.codec;
 import github.tuquanrong.model.constant.PackageConstant;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
+import github.tuquanrong.model.enums.SerializerEnum;
 import github.tuquanrong.serializer.ProtostuffSerializer;
 import github.tuquanrong.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -22,7 +23,7 @@ public class EncodePackageTest {
         ByteBuf out = ByteBufAllocator.DEFAULT.buffer(100, 1000);
         MessageDto messageDto=new MessageDto();
         messageDto.setMessageType(PackageConstant.RequestPackage);
-        messageDto.setSerializationType(PackageConstant.ProtostufSerializer);
+        messageDto.setSerializationType(SerializerEnum.PROTOSTUF_SERIALIZER.getType());
         messageDto.setVersion(PackageConstant.BetaVersion);
         RequestDto requestDto=new RequestDto();
         requestDto.setInterfaceName("tutututu");
@@ -38,7 +39,7 @@ public class EncodePackageTest {
         System.out.println(out);
 
         Serializer serializer = null;
-        if (messageDto.getSerializationType() == PackageConstant.ProtostufSerializer) {
+        if (messageDto.getSerializationType() == SerializerEnum.PROTOSTUF_SERIALIZER.getType()) {
             serializer = new ProtostuffSerializer();
         }
         byte[] dataBytes = serializer.serialize(messageDto.getData());

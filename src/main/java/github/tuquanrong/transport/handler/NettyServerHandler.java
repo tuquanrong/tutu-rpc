@@ -5,18 +5,17 @@ import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
 import github.tuquanrong.proxy.ServerProxy;
-import github.tuquanrong.util.ResponseState;
+import github.tuquanrong.util.MessageBuilder;
+import github.tuquanrong.util.ResponseBuilder;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.ReferenceCountUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * tutu
  * 2021/1/6
  */
-public class NettyServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler extends SimpleChannelInboundHandler<MessageDto> {
     private ServerProxy serverProxy;
 
     public NettyServerHandler() {
@@ -24,25 +23,19 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        try {
-            if (msg instanceof MessageDto) {
-                MessageDto messageDto = (MessageDto) msg;
-                MessageDto responseMessage = new MessageDto();
-                if (messageDto.getMessageType() == PackageConstant.RequestPackage) {
-                    RequestDto requestDto = (RequestDto) messageDto.getData();
-                    Object data = serverProxy.invoke(requestDto);//通过requestDto中的参数调用函数
-                    responseMessage.setVersion(messageDto.getVersion());
-                    responseMessage.setSerializationType(messageDto.getSerializationType());
-                    responseMessage.setMessageType(PackageConstant.ResposnePackage);
-                    ResponseDto responseDto = ResponseState.success(requestDto.getRequestId(), data);
-                    responseMessage.setData(responseDto);
-                }
-                System.out.println(responseMessage);
-                ctx.writeAndFlush(responseMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
-            }
-        } finally {
-            ReferenceCountUtil.release(msg);
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageDto messageDto) throws Exception {
+        System.out.println("server" + messageDto);
+        MessageDto responseMessage = new MessageDto();
+        if (messageDto.getMessageType() == PackageConstant.RequestPackage) {
+            RequestDto requestDto = (RequestDto) messageDto.getData();
+            System.out.println("invoke");
+            Object data = serverProxy.invoke(requestDto); //通过requestDto中的参数调用函数
+            System.out.println(data);
+            ResponseDto responseDto = ResponseBuilder.success(requestDto.getRequestId(), data);
+            System.out.println(responseDto);
+            responseMessage = MessageBuilder.genarateResponseMessage(messageDto, responseDto);
         }
+        System.out.println(responseMessage);
+        channelHandlerContext.channel().writeAndFlush(responseMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
     }
 }

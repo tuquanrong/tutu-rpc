@@ -5,12 +5,13 @@ import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.ResponseDto;
 import github.tuquanrong.transport.UnDealMessage;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * 作用：解码之后将返回结果进行写入completeFuture
+ * 提供异步处理消息题能力
  */
-public class NettyClientHandler extends ChannelInboundHandlerAdapter {
+public class NettyClientHandler extends SimpleChannelInboundHandler<MessageDto> {
     private UnDealMessage unDealMessage;
 
     public NettyClientHandler() {
@@ -18,14 +19,14 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        if (msg instanceof MessageDto) {
-            MessageDto messageDto = (MessageDto) msg;
-            byte messageType = messageDto.getMessageType();
-            if (messageType == PackageConstant.ResposnePackage) {
-                ResponseDto<Object> responseDto = (ResponseDto<Object>) messageDto.getData();
-                unDealMessage.dealRequestId(responseDto);
-            }
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageDto messageDto) throws Exception {
+        System.out.println("clientRead");
+        byte messageType = messageDto.getMessageType();
+        System.out.println(messageType);
+        if (messageType == PackageConstant.ResposnePackage) {
+            ResponseDto<Object> responseDto = (ResponseDto<Object>) messageDto.getData();
+            System.out.println(responseDto);
+            unDealMessage.dealRequestId(responseDto);
         }
     }
 }

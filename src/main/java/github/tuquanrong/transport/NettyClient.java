@@ -1,14 +1,21 @@
 package github.tuquanrong.transport;
 
-import github.tuquanrong.register.ServerDiscover;
-import github.tuquanrong.exception.RpcException;
-import github.tuquanrong.model.constant.PackageConstant;
+import java.net.InetSocketAddress;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+
+import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
+import github.tuquanrong.model.enums.RpcServerStatusEnum;
+import github.tuquanrong.register.ServerDiscover;
 import github.tuquanrong.transport.codec.DecodePackage;
 import github.tuquanrong.transport.codec.EncodePackage;
 import github.tuquanrong.transport.handler.NettyClientHandler;
+import github.tuquanrong.util.MessageBuilder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
@@ -19,17 +26,17 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.net.InetSocketAddress;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-
 public class NettyClient {
+    private static final NettyClient NETTY_CLIENT = new NettyClient();
+    private static final Integer CONNECT_TIMEOUT = 5000;
     private Bootstrap bootstrap;
-    private ServerDiscover serverDiscover;
     private Map<String, Channel> channelMap = new ConcurrentHashMap<>();
     private UnDealMessage unDealMessage;
+    private ServerDiscover serverDiscover;
+
+    public static NettyClient getInstance() {
+        return NETTY_CLIENT;
+    }
 
     public NettyClient() {
         unDealMessage = UnDealMessage.getInstance();
@@ -39,29 +46,27 @@ public class NettyClient {
         bootstrap
                 .group(eventGroup)
                 .channel(NioSocketChannel.class)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, CONNECT_TIMEOUT)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel.pipeline().addLast(new DecodePackage());//1
-                        socketChannel.pipeline().addLast(new NettyClientHandler());//2
-                        socketChannel.pipeline().addLast(new EncodePackage());//3
+                        socketChannel.pipeline().addLast(new DecodePackage());
+                        socketChannel.pipeline().addLast(new NettyClientHandler());
+                        socketChannel.pipeline().addLast(new EncodePackage());
                     }
                 });
     }
 
     public CompletableFuture sendMessage(RequestDto requestDto) {
         CompletableFuture<ResponseDto> completableFuture = new CompletableFuture<>();
+        System.out.println("start");
         InetSocketAddress inetSocketAddress = serverDiscover.discoverServer(requestDto.getInterfaceName());
-        ;
+        System.out.println("start");
         Channel channel = getChannel(inetSocketAddress);
         if (channel.isActive()) {
             unDealMessage.setRequestId(requestDto.getRequestId(), completableFuture);
-            MessageDto messageDto = new MessageDto();
-            messageDto.setVersion(PackageConstant.BetaVersion);
-            messageDto.setMessageType(PackageConstant.RequestPackage);
-            messageDto.setSerializationType(PackageConstant.ProtostufSerializer);
-            messageDto.setData(requestDto);
+            MessageDto messageDto = MessageBuilder.genarateRequestMessage(requestDto);
+            System.out.println(messageDto);
             channel.writeAndFlush(messageDto).addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
                     System.out.println("请求成功" + messageDto.toString());
@@ -72,7 +77,7 @@ public class NettyClient {
                 }
             });
         } else {
-            throw new RpcException("该ip+port通道被关闭");
+            throw new RpcServerException(RpcServerStatusEnum.TRANSPORT_CLOSED);
         }
         return completableFuture;
     }
@@ -87,7 +92,7 @@ public class NettyClient {
                         System.out.println("客户端连接成功" + inetSocketAddress.toString());
                         completableFuture.complete(future.channel());
                     } else {
-                        throw new RpcException("客户端连接错误" + inetSocketAddress.toString());
+                        throw new RpcServerException(RpcServerStatusEnum.CONNECT_ERROR);
                     }
                 });
                 channel = completableFuture.get();

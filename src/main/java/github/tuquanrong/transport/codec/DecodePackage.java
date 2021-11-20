@@ -1,26 +1,22 @@
 package github.tuquanrong.transport.codec;
 
-import github.tuquanrong.exception.RpcException;
+import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.constant.PackageConstant;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
-import github.tuquanrong.serializer.ProtostuffSerializer;
+import github.tuquanrong.model.enums.RpcServerStatusEnum;
+import github.tuquanrong.model.enums.SerializerEnum;
 import github.tuquanrong.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * tutu
  * 2021/1/6
  */
 public class DecodePackage extends LengthFieldBasedFrameDecoder {
-    private Serializer serializer;
 
     public DecodePackage() {
         this(PackageConstant.PackageMaxLength, 4, 4, -8, 0);
@@ -49,19 +45,23 @@ public class DecodePackage extends LengthFieldBasedFrameDecoder {
         return message;
     }
 
-    public Object decodePackage(ByteBuf in) {
+    @SuppressWarnings("checkstyle:MagicNumber")
+    public Object decodePackage(ByteBuf in) throws Exception {
         byte[] magicNumber = new byte[4];
         in.readBytes(magicNumber);
         for (int i = 0; i < 4; i++) {
             if (magicNumber[i] != PackageConstant.MagicNumber[i]) {
-                throw new RpcException("不是当前协议的包");
+                throw new RpcServerException(RpcServerStatusEnum.PROCOCOL_NOT_SUPPORT);
             }
         }
         int packageLength = in.readInt();
         byte version = in.readByte();
         byte serializationType = in.readByte();
         byte messageType = in.readByte();
-        int requestId = in.readInt();
+        byte[] requestIdBytes = new byte[36];
+        in.readBytes(requestIdBytes);
+        String requestId = new String(requestIdBytes);
+        System.out.println("request");
         int dataLength = packageLength - PackageConstant.HeaderLength;
         byte[] dataBytes = new byte[dataLength];
         in.readBytes(dataBytes);
@@ -70,9 +70,8 @@ public class DecodePackage extends LengthFieldBasedFrameDecoder {
         messageDto.setSerializationType(serializationType);
         messageDto.setRequestId(requestId);
         messageDto.setMessageType(messageType);
-        if (messageDto.getSerializationType() == PackageConstant.ProtostufSerializer) {
-            serializer = ProtostuffSerializer.getInstance();
-        }
+        Serializer serializer = (Serializer) SerializerEnum
+                .fromValue(messageDto.getSerializationType()).getDealClass().getMethod("getInstance").invoke(null);
         if (messageType == PackageConstant.RequestPackage) {
             messageDto.setData(serializer.deserialize(dataBytes, RequestDto.class));
         } else if (messageType == PackageConstant.ResposnePackage) {

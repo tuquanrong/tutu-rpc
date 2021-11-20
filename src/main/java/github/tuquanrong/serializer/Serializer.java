@@ -5,7 +5,7 @@ package github.tuquanrong.serializer;
  * 2021/1/7
  */
 public interface Serializer {
-    public <T> byte[] serialize(T obj);
+    <T> byte[] serialize(T obj);
 
-    public <T> T deserialize(byte[] data, Class<T> clazz);
+    <T> T deserialize(byte[] data, Class<T> clazz);
 }

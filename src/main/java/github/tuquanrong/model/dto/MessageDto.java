@@ -24,6 +24,6 @@ public class MessageDto {
     private byte version;
     private byte serializationType;
     private byte messageType;
-    private int requestId;
+    private String requestId;
     private Object data;
 }

@@ -7,5 +7,5 @@ import java.util.List;
  * 2021/1/20
  */
 public interface ServerLoadBalance {
-    public String selectServer(List<String> ipList, String className);
+    String selectServer(List<String> ipList, String className);
 }

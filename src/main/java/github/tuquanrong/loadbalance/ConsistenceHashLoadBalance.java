@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ConsistenceHashLoadBalance implements ServerLoadBalance {
     private static final ConsistenceHashLoadBalance LOAD_BALANCE_INSTANCE = new ConsistenceHashLoadBalance();
+    private static final Integer REPLICA_NUMBER = 160;
     private Map<String, ConsistentHashSelector> selectorMap = new ConcurrentHashMap<>();
 
     public static ConsistenceHashLoadBalance getInstance() {
@@ -31,7 +32,7 @@ public class ConsistenceHashLoadBalance implements ServerLoadBalance {
         long hashCode = System.identityHashCode(inetList);
         ConsistentHashSelector consistentHashSelector = selectorMap.get(className);
         if (consistentHashSelector == null || hashCode != consistentHashSelector.IP_LIST_HASHCODE) {
-            selectorMap.put(className, new ConsistentHashSelector(hashCode, inetList, 160));
+            selectorMap.put(className, new ConsistentHashSelector(hashCode, inetList, REPLICA_NUMBER));
             consistentHashSelector = selectorMap.get(className);
         }
         return consistentHashSelector.select(className);
@@ -39,6 +40,7 @@ public class ConsistenceHashLoadBalance implements ServerLoadBalance {
 
     static class ConsistentHashSelector {
         private TreeMap<Long, String> treeMap;
+        @SuppressWarnings("checkstyle:MemberName")
         private long IP_LIST_HASHCODE;
 
         public ConsistentHashSelector(long hashCode, List<String> inetList, int replicaNumber) {
@@ -70,6 +72,7 @@ public class ConsistenceHashLoadBalance implements ServerLoadBalance {
         }
 
         //生成每一个虚拟节点在hash环上的位置,目的为将虚拟节点分散开
+        @SuppressWarnings("checkstyle:MagicNumber")
         private long hash(byte[] digest, int number) {
             return (((long) (digest[3 + number * 4] & 0xFF) << 24)
                     | ((long) (digest[2 + number * 4] & 0xFF) << 16)

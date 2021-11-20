@@ -1,5 +1,8 @@
 package github.tuquanrong.transport;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import github.tuquanrong.register.ZkShutdownHook;
 import github.tuquanrong.transport.codec.DecodePackage;
 import github.tuquanrong.transport.codec.EncodePackage;
@@ -14,12 +17,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
 public class NettyServer {
-    public final static int PORT = 9085;
+    private static int port = 9085;
     private ServerBootstrap serverBootstrap;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;
@@ -32,6 +34,7 @@ public class NettyServer {
         eventExecutorGroup = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     public void start() {
         try {
             ZkShutdownHook.clearServiceNode();
@@ -46,13 +49,13 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline channelPipeline = socketChannel.pipeline();
-                            channelPipeline.addLast(new EncodePackage());
                             channelPipeline.addLast(new DecodePackage());
                             channelPipeline.addLast(eventExecutorGroup, new NettyServerHandler());
+                            channelPipeline.addLast(new EncodePackage());
                         }
                     });
-            System.out.println(ip + "  " + PORT);
-            ChannelFuture channelFuture = serverBootstrap.bind(ip, PORT).sync();
+            System.out.println(ip + "  " + port);
+            ChannelFuture channelFuture = bind(serverBootstrap, ip, port).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (UnknownHostException | InterruptedException e) {
             e.printStackTrace();
@@ -61,5 +64,23 @@ public class NettyServer {
             workGroup.shutdownGracefully();
             eventExecutorGroup.shutdownGracefully();
         }
+    }
+
+    private ChannelFuture bind(ServerBootstrap nowServerBootstrap, String ip, int nowPort) {
+        return nowServerBootstrap.bind(ip, nowPort).addListener(new GenericFutureListener<Future<? super Void>>() {
+            public void operationComplete(Future<? super Void> future) {
+                if (future.isSuccess()) {
+                    System.out.println("端口[" + nowPort + "]绑定成功!");
+                    port = nowPort;
+                } else {
+                    System.err.println("端口[" + nowPort + "]绑定失败!");
+                    bind(nowServerBootstrap, ip, nowPort + 1);
+                }
+            }
+        });
+    }
+
+    public static int getPort() {
+        return port;
     }
 }

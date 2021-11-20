@@ -1,12 +1,12 @@
 package github.tuquanrong.serializer;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ProtostuffSerializer implements Serializer {

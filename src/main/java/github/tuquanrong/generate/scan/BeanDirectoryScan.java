@@ -1,14 +1,15 @@
 package github.tuquanrong.generate.scan;
 
+import java.lang.annotation.Annotation;
+
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
-import java.lang.annotation.Annotation;
-
 /**
  * tutu
  * 2021/1/15
+ * 将指定注解添加到扫描列表"此处可以进行扫描注解的自定义"
  */
 public class BeanDirectoryScan extends ClassPathBeanDefinitionScanner {
     public BeanDirectoryScan(BeanDefinitionRegistry registry, Class<? extends Annotation> annotation) {

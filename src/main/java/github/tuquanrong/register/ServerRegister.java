@@ -1,10 +1,10 @@
 package github.tuquanrong.register;
 
-import github.tuquanrong.transport.NettyServer;
-
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+
+import github.tuquanrong.transport.NettyServer;
 
 /**
  * tutu
@@ -14,8 +14,8 @@ public class ServerRegister {
     private static final ServerRegister SERVER_REGISTER = new ServerRegister();
     private ZkController zkController;
 
-    ServerRegister(){
-        zkController=ZkController.getInstance();
+    ServerRegister() {
+        zkController = ZkController.getInstance();
     }
 
     public static ServerRegister getInstance() {
@@ -25,7 +25,8 @@ public class ServerRegister {
     public void registerServer(String className) {
         try {
             String ip = InetAddress.getLocalHost().getHostAddress();
-            int port = NettyServer.PORT;
+            int port = NettyServer.getPort();
+            System.out.println(ip + port);
             zkController.createNode(ZkController.ZK_RPC_LINK + "/" + className + new InetSocketAddress(ip, port).toString());
         } catch (UnknownHostException e) {
             e.printStackTrace();
