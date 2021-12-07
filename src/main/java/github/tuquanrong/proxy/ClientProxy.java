@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.concurrent.CompletableFuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
@@ -17,6 +20,7 @@ import github.tuquanrong.util.RequestBuilder;
  * 2021/1/13
  */
 public class ClientProxy implements InvocationHandler {
+    private static final Logger logger = LoggerFactory.getLogger(ClientProxy.class);
     private static final ClientProxy CLIENT_PROXY = new ClientProxy();
     private NettyClient nettyClient;
 
@@ -35,10 +39,9 @@ public class ClientProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         RequestDto requestDto = RequestBuilder.genarateRequest(method, args);
-        System.out.println(requestDto);
         CompletableFuture<ResponseDto> completableFuture = nettyClient.sendMessage(requestDto);
         ResponseDto responseDto = completableFuture.get();
-        System.out.println(responseDto);
+        logger.info("client.invoke.requestDto {} responseDto {}", requestDto, responseDto);
         dealException(requestDto, responseDto);
         return responseDto.getData();
     }

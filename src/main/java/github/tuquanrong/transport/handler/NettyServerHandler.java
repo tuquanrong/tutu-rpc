@@ -24,18 +24,13 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<MessageDto> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageDto messageDto) throws Exception {
-        System.out.println("server" + messageDto);
         MessageDto responseMessage = new MessageDto();
         if (messageDto.getMessageType() == PackageConstant.RequestPackage) {
             RequestDto requestDto = (RequestDto) messageDto.getData();
-            System.out.println("invoke");
             Object data = serverProxy.invoke(requestDto); //通过requestDto中的参数调用函数
-            System.out.println(data);
             ResponseDto responseDto = ResponseBuilder.success(requestDto.getRequestId(), data);
-            System.out.println(responseDto);
             responseMessage = MessageBuilder.genarateResponseMessage(messageDto, responseDto);
         }
-        System.out.println(responseMessage);
         channelHandlerContext.channel().writeAndFlush(responseMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
     }
 }

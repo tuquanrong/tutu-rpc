@@ -6,6 +6,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
@@ -27,6 +30,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class NettyClient {
+    private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
     private static final NettyClient NETTY_CLIENT = new NettyClient();
     private static final Integer CONNECT_TIMEOUT = 5000;
     private Bootstrap bootstrap;
@@ -59,19 +63,17 @@ public class NettyClient {
 
     public CompletableFuture sendMessage(RequestDto requestDto) {
         CompletableFuture<ResponseDto> completableFuture = new CompletableFuture<>();
-        System.out.println("start");
+
         InetSocketAddress inetSocketAddress = serverDiscover.discoverServer(requestDto.getInterfaceName());
-        System.out.println("start");
         Channel channel = getChannel(inetSocketAddress);
         if (channel.isActive()) {
             unDealMessage.setRequestId(requestDto.getRequestId(), completableFuture);
             MessageDto messageDto = MessageBuilder.genarateRequestMessage(requestDto);
-            System.out.println(messageDto);
             channel.writeAndFlush(messageDto).addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
-                    System.out.println("请求成功" + messageDto.toString());
+                    logger.info("请求成功" + messageDto.toString());
                 } else {
-                    System.out.println("请求失败" + messageDto.toString());
+                    logger.info("请求失败" + messageDto.toString());
                     future.channel().close();
                     completableFuture.completeExceptionally(future.cause());
                 }
@@ -89,7 +91,7 @@ public class NettyClient {
                 CompletableFuture<Channel> completableFuture = new CompletableFuture<>();
                 bootstrap.connect(inetSocketAddress).addListener((ChannelFutureListener) future -> {
                     if (future.isSuccess()) {
-                        System.out.println("客户端连接成功" + inetSocketAddress.toString());
+                        logger.info("客户端链接成功" + inetSocketAddress.toString());
                         completableFuture.complete(future.channel());
                     } else {
                         throw new RpcServerException(RpcServerStatusEnum.CONNECT_ERROR);

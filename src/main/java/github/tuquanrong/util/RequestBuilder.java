@@ -12,7 +12,9 @@ import github.tuquanrong.model.dto.RequestDto;
 public class RequestBuilder {
     public static RequestDto genarateRequest(Method method, Object[] args) {
         RequestDto requestDto = new RequestDto();
-        requestDto.setInterfaceName(method.getDeclaringClass().getName());
+        String[] classNamePathStr = method.getDeclaringClass().getName().split("\\.");
+        String className = classNamePathStr[classNamePathStr.length - 1];
+        requestDto.setInterfaceName(className);
         requestDto.setMethodName(method.getName());
         requestDto.setMethodParamType(method.getParameterTypes());
         requestDto.setParams(args);

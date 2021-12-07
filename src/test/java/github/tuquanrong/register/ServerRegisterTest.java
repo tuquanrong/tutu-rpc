@@ -6,7 +6,7 @@ package github.tuquanrong.register;
  */
 public class ServerRegisterTest {
     public static void main(String[] args) {
-        ServerRegister serverRegister=new ServerRegister();
-        serverRegister.registerServer("helloServer");
+        ServerRegisterLogout serverRegisterLogout =new ServerRegisterLogout();
+        serverRegisterLogout.registerServer("helloServer");
     }
 }

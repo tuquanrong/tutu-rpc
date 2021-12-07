@@ -1,7 +1,17 @@
 package github.tuquanrong.proxy;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.EntryType;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.Tracer;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 
 import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.RequestDto;
@@ -13,6 +23,7 @@ import github.tuquanrong.register.ServiceBeans;
  * 2021/1/13
  */
 public class ServerProxy {
+    private static final Logger logger = LoggerFactory.getLogger(ServerProxy.class);
     private static final ServerProxy SERVER_PROXY = new ServerProxy();
     private ServiceBeans serviceBeans;
 
@@ -25,24 +36,30 @@ public class ServerProxy {
     }
 
     public Object invoke(RequestDto requestDto) {
-        System.out.println(requestDto);
         Object data = null;
+        Entry entry = null;
         try {
-            Class interfaceName = Class.forName(requestDto.getInterfaceName());
+            Class<?> interfaceName = serviceBeans.getClass(requestDto.getInterfaceName());
             Method method1 = interfaceName.getMethod(requestDto.getMethodName(), requestDto.getMethodParamType());
-            System.out.println("one" + method1);
-            Object service = serviceBeans.getService(interfaceName.getName());
-            System.out.println("two" + service);
+            Object service = serviceBeans.getService(requestDto.getInterfaceName());
             if (service == null) {
                 throw new RpcServerException(RpcServerStatusEnum.NO_DISCOVER_SERVER);
             }
+            entry = SphU.entry(requestDto.getInterfaceName(), EntryType.IN, 1);
             data = method1.invoke(service, requestDto.getParams());
-        } catch (ClassNotFoundException | NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (FlowException e) {
+            logger.error("被限流了.requestDto {}", requestDto);
+        } catch (DegradeException e) {
+            logger.error("异常太多熔断了 {}", requestDto);
+        } catch (BlockException blockException) {
+            logger.error("sentinel错误了");
+        } catch (Exception exception) {
+            Tracer.trace(exception);
+            //exception.printStackTrace();
+        } finally {
+            if (entry != null) {
+                entry.exit();
+            }
         }
         return data;
     }

@@ -3,6 +3,7 @@ package github.tuquanrong.util;
 import java.util.UUID;
 
 import github.tuquanrong.config.PropertiesConfig;
+import github.tuquanrong.config.model.PropertiesEnum;
 import github.tuquanrong.model.constant.PackageConstant;
 import github.tuquanrong.model.dto.MessageDto;
 import github.tuquanrong.model.dto.RequestDto;
@@ -19,10 +20,10 @@ public class MessageBuilder {
         MessageDto messageDto = new MessageDto();
         messageDto.setVersion(PackageConstant.BetaVersion);
         messageDto.setMessageType(PackageConstant.RequestPackage);
-        String serializerConfig = PropertiesConfig.getInstance().get(PropertiesConfig.PropertiesEnum.SERIALIZER);
+        String serializerConfig = PropertiesConfig.getInstance().get(PropertiesEnum.SERIALIZER);
         byte serializerType = Byte.valueOf(serializerConfig);
         if (SerializerEnum.fromValue(serializerType) == null) {
-            serializerType = Byte.valueOf(PropertiesConfig.getInstance().getDefault(PropertiesConfig.PropertiesEnum.SERIALIZER));
+            serializerType = Byte.valueOf(PropertiesConfig.getInstance().getDefault(PropertiesEnum.SERIALIZER));
         }
         messageDto.setSerializationType(serializerType);
         messageDto.setRequestId(UUID.randomUUID().toString());

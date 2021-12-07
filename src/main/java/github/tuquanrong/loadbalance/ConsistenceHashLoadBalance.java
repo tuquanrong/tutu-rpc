@@ -52,7 +52,6 @@ public class ConsistenceHashLoadBalance implements ServerLoadBalance {
                     for (int j = 0; j < 4; j++) {
                         long id = hash(keyBytes, j);
                         treeMap.put(id, inet);
-//                        System.out.println(id+"   "+inet);
                     }
                 }
             }
@@ -87,7 +86,6 @@ public class ConsistenceHashLoadBalance implements ServerLoadBalance {
         }
 
         public String selectForKey(long index) {
-            System.out.println(index);
             Map.Entry<Long, String> keyEntry = treeMap.tailMap(index, true).firstEntry();
             if (keyEntry == null) {
                 keyEntry = treeMap.firstEntry();

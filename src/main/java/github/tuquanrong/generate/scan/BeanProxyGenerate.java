@@ -3,6 +3,8 @@ package github.tuquanrong.generate.scan;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,7 @@ import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.generate.TutuServiceMark;
 import github.tuquanrong.model.enums.RpcServerStatusEnum;
 import github.tuquanrong.proxy.ClientProxy;
-import github.tuquanrong.register.ServerRegister;
+import github.tuquanrong.register.ServerRegisterLogout;
 import github.tuquanrong.register.ServiceBeans;
 
 /**
@@ -21,12 +23,13 @@ import github.tuquanrong.register.ServiceBeans;
  */
 @Component
 public class BeanProxyGenerate implements BeanPostProcessor {
+    private static final Logger logger = LoggerFactory.getLogger(BeanProxyGenerate.class);
     private ServiceBeans serviceBeans;
-    private ServerRegister serverRegister;
+    private ServerRegisterLogout serverRegisterLogout;
 
     public BeanProxyGenerate() {
         serviceBeans = ServiceBeans.getInstance();
-        serverRegister = ServerRegister.getInstance();
+        serverRegisterLogout = ServerRegisterLogout.getInstance();
     }
 
     /**
@@ -47,9 +50,12 @@ public class BeanProxyGenerate implements BeanPostProcessor {
             }
         });
         if (interfaces.length == 1 && interfaces[0].isAnnotationPresent(TutuServiceMark.class)) {
-            String className = interfaces[0].getName();
+            String classNamePath = interfaces[0].getName();
+            String[] classNamePathStr = classNamePath.split("\\.");
+            String className = classNamePathStr[classNamePathStr.length - 1];
             serviceBeans.setService(className, bean);
-            serverRegister.registerServer(className);
+            serviceBeans.setClass(className, interfaces[0]);
+            serverRegisterLogout.registerServer(className);
         }
         return bean;
     }
@@ -65,6 +71,7 @@ public class BeanProxyGenerate implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<?> componentName = bean.getClass();
+        logger.info(componentName.getName());
         for (Field field : componentName.getDeclaredFields()) {
             if (field.getType().isAnnotationPresent(TutuServiceMark.class)) {
                 Object proxyBean = ClientProxy.getInstance().getProxy(field.getType());

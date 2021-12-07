@@ -20,12 +20,9 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<MessageDto> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageDto messageDto) throws Exception {
-        System.out.println("clientRead");
         byte messageType = messageDto.getMessageType();
-        System.out.println(messageType);
         if (messageType == PackageConstant.ResposnePackage) {
             ResponseDto<Object> responseDto = (ResponseDto<Object>) messageDto.getData();
-            System.out.println(responseDto);
             unDealMessage.dealRequestId(responseDto);
         }
     }

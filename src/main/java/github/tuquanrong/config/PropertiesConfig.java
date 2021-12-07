@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+import github.tuquanrong.config.model.PropertiesEnum;
+
 /**
  * tutu
  * 2021/1/22
@@ -39,26 +41,5 @@ public class PropertiesConfig {
 
     public String getDefault(PropertiesEnum propertiesEnum) {
         return propertiesEnum.getDefaultValue().trim();
-    }
-
-    public static enum PropertiesEnum {
-        ZOOKEEPER("zk", "127.0.0.1:2181"),
-        SERIALIZER("serializer", "1");
-
-        private String name;
-        private String defaultValue;
-
-        PropertiesEnum(String name, String defaultValue) {
-            this.name = name;
-            this.defaultValue = defaultValue;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getDefaultValue() {
-            return defaultValue;
-        }
     }
 }

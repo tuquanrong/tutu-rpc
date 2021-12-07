@@ -27,7 +27,6 @@ public class EncodePackage extends MessageToByteEncoder<MessageDto> {
                 .fromValue(messageDto.getSerializationType()).getDealClass().getMethod("getInstance").invoke(null);
 
         byte[] dataBytes = serializer.serialize(messageDto.getData());
-        System.out.println("serializer" + dataBytes + messageDto.getData());
         out.writeBytes(dataBytes);
 
         int packageLength = out.writerIndex();

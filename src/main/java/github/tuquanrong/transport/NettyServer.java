@@ -3,6 +3,9 @@ package github.tuquanrong.transport;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import github.tuquanrong.register.ZkShutdownHook;
 import github.tuquanrong.transport.codec.DecodePackage;
 import github.tuquanrong.transport.codec.EncodePackage;
@@ -21,6 +24,7 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
 public class NettyServer {
+    private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
     private static int port = 9085;
     private ServerBootstrap serverBootstrap;
     private EventLoopGroup bossGroup;
@@ -54,7 +58,6 @@ public class NettyServer {
                             channelPipeline.addLast(new EncodePackage());
                         }
                     });
-            System.out.println(ip + "  " + port);
             ChannelFuture channelFuture = bind(serverBootstrap, ip, port).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (UnknownHostException | InterruptedException e) {
@@ -70,9 +73,10 @@ public class NettyServer {
         return nowServerBootstrap.bind(ip, nowPort).addListener(new GenericFutureListener<Future<? super Void>>() {
             public void operationComplete(Future<? super Void> future) {
                 if (future.isSuccess()) {
-                    System.out.println("端口[" + nowPort + "]绑定成功!");
+                    logger.info("端口[" + nowPort + "]绑定成功!");
                     port = nowPort;
                 } else {
+                    logger.error("端口[" + nowPort + "]绑定失败!");
                     System.err.println("端口[" + nowPort + "]绑定失败!");
                     bind(nowServerBootstrap, ip, nowPort + 1);
                 }

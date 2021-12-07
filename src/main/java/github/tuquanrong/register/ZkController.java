@@ -14,10 +14,11 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import github.tuquanrong.config.PropertiesConfig;
-import github.tuquanrong.exception.RpcServerException;
-import github.tuquanrong.model.enums.RpcServerStatusEnum;
+import github.tuquanrong.config.model.PropertiesEnum;
 
 /**
  * tutu
@@ -25,6 +26,7 @@ import github.tuquanrong.model.enums.RpcServerStatusEnum;
  * pathContiner：作用为在删除节点的时候提供删除列表
  */
 public class ZkController {
+    private static final Logger logger = LoggerFactory.getLogger(ZkController.class);
     public static final String ZK_RPC_LINK = "/tutu-rpc";
     @SuppressWarnings("checkstyle:StaticVariableName")
     private static String DEFAULT_ZK_HOST = "127.0.0.1:2181";
@@ -46,7 +48,7 @@ public class ZkController {
         if (zkClient != null && zkClient.getState() == CuratorFrameworkState.STARTED) {
             return zkClient;
         }
-        DEFAULT_ZK_HOST = PropertiesConfig.getInstance().get(PropertiesConfig.PropertiesEnum.ZOOKEEPER);
+        DEFAULT_ZK_HOST = PropertiesConfig.getInstance().get(PropertiesEnum.ZOOKEEPER);
         zkClient = CuratorFrameworkFactory.builder()
                 .connectString(DEFAULT_ZK_HOST)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
@@ -63,10 +65,7 @@ public class ZkController {
             } else {
                 client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
             }
-            boolean status = pathContiner.add(path);
-            if (status == Boolean.FALSE) {
-                throw new RpcServerException(RpcServerStatusEnum.REGISTER_FAIL);
-            }
+            pathContiner.add(path);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,10 +88,8 @@ public class ZkController {
     }
 
     public void clearAllNode(InetSocketAddress inetSocketAddress) {
-        System.out.println(inetSocketAddress.toString() + " end ");
         CuratorFramework client = getZkClient();
         String suffix = inetSocketAddress.toString();
-        System.out.println(pathContiner);
         pathContiner.stream().parallel().forEach(p -> {
             try {
                 if (p.endsWith(suffix)) {
@@ -102,6 +99,16 @@ public class ZkController {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void deleteNode(String path) {
+        CuratorFramework client = getZkClient();
+        try {
+            client.delete().forPath(path);
+            pathContiner.remove(path);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void addServerListener(String path, CuratorFramework client) throws Exception {

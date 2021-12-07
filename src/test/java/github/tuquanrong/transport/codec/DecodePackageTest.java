@@ -24,7 +24,6 @@ public class DecodePackageTest {
 
     public static void main(String[] args) {
         ByteBuf in = getByteBuf();
-        System.out.println(in.readableBytes());
         byte[] magicNumber = new byte[4];
         in.readBytes(magicNumber);
         for (int i = 0; i < 4; i++) {
@@ -39,10 +38,6 @@ public class DecodePackageTest {
         byte[] requestIdBytes = new byte[36];
         in.readBytes(requestIdBytes);
         String requestId = new String(requestIdBytes);
-        System.out.println(requestId);
-        System.out.println(in.readableBytes());
-        System.out.println(packageLength);
-        System.out.println(PackageConstant.HeaderLength);
 
         int dataLength = packageLength - PackageConstant.HeaderLength;
         byte[] dataBytes = new byte[dataLength];
@@ -58,7 +53,6 @@ public class DecodePackageTest {
         } else if (messageType == PackageConstant.ResposnePackage) {
             messageDto.setData(serializer.deserialize(dataBytes, ResponseDto.class));
         }
-        System.out.println(messageDto);
     }
 
     public static ByteBuf getByteBuf() {

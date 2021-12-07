@@ -61,7 +61,6 @@ public class DecodePackage extends LengthFieldBasedFrameDecoder {
         byte[] requestIdBytes = new byte[36];
         in.readBytes(requestIdBytes);
         String requestId = new String(requestIdBytes);
-        System.out.println("request");
         int dataLength = packageLength - PackageConstant.HeaderLength;
         byte[] dataBytes = new byte[dataLength];
         in.readBytes(dataBytes);

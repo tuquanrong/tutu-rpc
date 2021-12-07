@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import github.tuquanrong.model.dto.ResponseDto;
 
 /**
@@ -11,6 +14,7 @@ import github.tuquanrong.model.dto.ResponseDto;
  * 2021/1/10
  */
 public class UnDealMessage {
+    private static final Logger logger = LoggerFactory.getLogger(UnDealMessage.class);
     private static final UnDealMessage UN_DEAL_MESSAGE = new UnDealMessage();
     private Map<String, CompletableFuture<ResponseDto>> map = new HashMap<>();
 
@@ -30,10 +34,9 @@ public class UnDealMessage {
     public void dealRequestId(ResponseDto responseDto) {
         CompletableFuture<ResponseDto> completableFuture = map.get(responseDto.getResponseId());
         if (completableFuture != null) {
-            System.out.println("dealRequestId.responseDto" + responseDto);
             completableFuture.complete(responseDto);
         } else {
-            System.out.println("failDeal");
+            logger.error("failDeal");
         }
     }
 }
