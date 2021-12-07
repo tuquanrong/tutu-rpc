@@ -64,6 +64,10 @@ public class ServerDiscover {
         return new InetSocketAddress(ipPort[0], Integer.parseInt(ipPort[1]));
     }
 
+    public void refreshCache(String className) {
+        ipPortCache.refresh(className);
+    }
+
     public List<String> getServicesByClass(String className) {
         List<String> list = zkController.getChilderNode(className);
         return list;

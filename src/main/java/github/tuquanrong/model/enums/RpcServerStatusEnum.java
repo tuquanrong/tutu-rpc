@@ -21,7 +21,11 @@ public enum RpcServerStatusEnum {
     TRANSPORT_CLOSED(2003, "传输通道被关闭"),
     CONNECT_ERROR(2004, "客户端连接错误"),
     SERVER_ID_MISTAKE(2005, "请求ID与应答ID不一致"),
-    PROCOCOL_NOT_SUPPORT(2006, "当前协议不支持");
+    PROCOCOL_NOT_SUPPORT(2006, "当前协议不支持"),
+
+    SENTINEL_ERROR(3000, "sentinel错误"),
+    FLOW_ERROR(3001, "服务已开启流量控制"),
+    DEGRADE_ERROR(3002, "服务已熔断");
 
 
     private int code;

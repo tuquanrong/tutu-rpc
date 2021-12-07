@@ -15,8 +15,10 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 
 import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.RequestDto;
+import github.tuquanrong.model.dto.ResponseDto;
 import github.tuquanrong.model.enums.RpcServerStatusEnum;
 import github.tuquanrong.register.ServiceBeans;
+import github.tuquanrong.util.ResponseBuilder;
 
 /**
  * tutu
@@ -35,7 +37,8 @@ public class ServerProxy {
         return SERVER_PROXY;
     }
 
-    public Object invoke(RequestDto requestDto) {
+    public ResponseDto invoke(RequestDto requestDto) {
+        ResponseDto responseDto = null;
         Object data = null;
         Entry entry = null;
         try {
@@ -47,13 +50,18 @@ public class ServerProxy {
             }
             entry = SphU.entry(requestDto.getInterfaceName(), EntryType.IN, 1);
             data = method1.invoke(service, requestDto.getParams());
+            responseDto = ResponseBuilder.success(requestDto.getRequestId(), data);
         } catch (FlowException e) {
+            responseDto = ResponseBuilder.error(requestDto.getRequestId(), data, RpcServerStatusEnum.FLOW_ERROR);
             logger.error("被限流了.requestDto {}", requestDto);
         } catch (DegradeException e) {
+            responseDto = ResponseBuilder.error(requestDto.getRequestId(), data, RpcServerStatusEnum.DEGRADE_ERROR);
             logger.error("异常太多熔断了 {}", requestDto);
         } catch (BlockException blockException) {
+            responseDto = ResponseBuilder.error(requestDto.getRequestId(), data, RpcServerStatusEnum.SENTINEL_ERROR);
             logger.error("sentinel错误了");
         } catch (Exception exception) {
+            responseDto = ResponseBuilder.error(requestDto.getRequestId(), data, RpcServerStatusEnum.SERVER_ERROR);
             Tracer.trace(exception);
             //exception.printStackTrace();
         } finally {
@@ -61,6 +69,6 @@ public class ServerProxy {
                 entry.exit();
             }
         }
-        return data;
+        return responseDto;
     }
 }

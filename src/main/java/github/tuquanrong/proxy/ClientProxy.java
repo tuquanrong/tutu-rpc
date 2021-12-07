@@ -12,6 +12,7 @@ import github.tuquanrong.exception.RpcServerException;
 import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
 import github.tuquanrong.model.enums.RpcServerStatusEnum;
+import github.tuquanrong.register.ServerDiscover;
 import github.tuquanrong.transport.NettyClient;
 import github.tuquanrong.util.RequestBuilder;
 
@@ -41,6 +42,9 @@ public class ClientProxy implements InvocationHandler {
         RequestDto requestDto = RequestBuilder.genarateRequest(method, args);
         CompletableFuture<ResponseDto> completableFuture = nettyClient.sendMessage(requestDto);
         ResponseDto responseDto = completableFuture.get();
+        if (responseDto.getCode() == RpcServerStatusEnum.DEGRADE_ERROR.getCode()) {
+            ServerDiscover.getInstance().refreshCache(requestDto.getInterfaceName());
+        }
         logger.info("client.invoke.requestDto {} responseDto {}", requestDto, responseDto);
         dealException(requestDto, responseDto);
         return responseDto.getData();

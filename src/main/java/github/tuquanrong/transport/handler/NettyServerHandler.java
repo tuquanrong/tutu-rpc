@@ -6,7 +6,6 @@ import github.tuquanrong.model.dto.RequestDto;
 import github.tuquanrong.model.dto.ResponseDto;
 import github.tuquanrong.proxy.ServerProxy;
 import github.tuquanrong.util.MessageBuilder;
-import github.tuquanrong.util.ResponseBuilder;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -27,8 +26,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<MessageDto> 
         MessageDto responseMessage = new MessageDto();
         if (messageDto.getMessageType() == PackageConstant.RequestPackage) {
             RequestDto requestDto = (RequestDto) messageDto.getData();
-            Object data = serverProxy.invoke(requestDto); //通过requestDto中的参数调用函数
-            ResponseDto responseDto = ResponseBuilder.success(requestDto.getRequestId(), data);
+            ResponseDto responseDto = serverProxy.invoke(requestDto); //通过requestDto中的参数调用函数
             responseMessage = MessageBuilder.genarateResponseMessage(messageDto, responseDto);
         }
         channelHandlerContext.channel().writeAndFlush(responseMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);

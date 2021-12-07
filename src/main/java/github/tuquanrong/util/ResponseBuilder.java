@@ -11,4 +11,8 @@ public class ResponseBuilder {
     public static ResponseDto success(String responseId, Object data) {
         return new ResponseDto(responseId, RpcServerStatusEnum.SERVER_SUCCESS.getCode(), RpcServerStatusEnum.SERVER_SUCCESS.getDesc(), data);
     }
+
+    public static ResponseDto error(String responseId, Object data, RpcServerStatusEnum rpcServerStatusEnum) {
+        return new ResponseDto(responseId, rpcServerStatusEnum.getCode(), rpcServerStatusEnum.getDesc(), data);
+    }
 }
