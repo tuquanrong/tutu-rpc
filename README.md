@@ -45,7 +45,7 @@ public class HelloServerImpl implements HelloService {
 //创建客户端使用文件
 @Component
 public class HelloClient {
-    @Autowired
+    @Autowired(required = false)
     private HelloService helloService;
     public String test(String name){
         return helloService.hello(name);
@@ -83,5 +83,32 @@ public class RpcClient {
 ```properties
 serializer=1
 zk=127.0.0.1:2181
+flowRule=[{"resource":"HelloService","qps":1000,"limitApp":"default"}]
+degradeRule=[{"resource":"HelloService","count":0.1,"timeWindow":10,"minRequestAmount":10,"statIntervalMs":10000}]
+```
+
+**支持流控和熔断配置**
+
+```json
+[
+    {
+        "resource":"HelloService",//资源名
+        "qps":1000,								//qps
+    }
+]
+```
+
+
+
+```json
+[
+    {
+        "resource":"HelloService",//接口名
+        "count":0.1,							//错误比例
+        "timeWindow":10,					//停顿时间
+        "minRequestAmount":10,		//最小请求数
+        "statIntervalMs":10000		//最小请求间隔
+    }
+
 ```
 

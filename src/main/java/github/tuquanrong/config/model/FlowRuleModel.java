@@ -14,5 +14,4 @@ import lombok.NoArgsConstructor;
 public class FlowRuleModel {
     private String resource;
     private int qps;
-    private String limitApp;
 }

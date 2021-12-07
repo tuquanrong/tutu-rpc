@@ -43,7 +43,7 @@ public class FlowControlConfig {
             rule.setResource(flowRuleModel.getResource());
             rule.setGrade(RuleConstant.FLOW_GRADE_QPS); //QPS控制
             rule.setCount(flowRuleModel.getQps());
-            rule.setLimitApp(flowRuleModel.getLimitApp());
+            rule.setLimitApp("default");
             rule.setStrategy(RuleConstant.STRATEGY_DIRECT); //根据调用方限流
             rule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_DEFAULT); //直接拒绝
             flowRuleList.add(rule);
