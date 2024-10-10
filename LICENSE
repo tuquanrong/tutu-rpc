@@ -1,0 +1,175 @@
+ENTERPRISE SOFTWARE LICENSE AGREEMENT
+This Enterprise Software License Agreement (the “Agreement”) is made between
+[Licensee.Company], (the “Client”, or "Licensee") and Ultralytics Inc. (the “Company”), a Delaware
+corporation with offices at 5001 Judicial Way, Frederick, MD 21703, United States, (collectively the
+“Parties”) as of (the “Effective Date”).
+1. Definitions. As used in this Agreement, the following terms have the following specific meanings:
+1. Annual Fee: An annual payment from the Licensee to the Company in the amount of () USD,
+granting organization-wide usage rights under this Agreement. The exact amount for each
+subsequent Annual Fee will be determined and confirmed thirty (30) days prior to the relevant
+renewal date.
+2. Consulting Services: company may provide consulting services to Licensee if requested
+under a separate agreement. Such services are made available at Company's standard time
+and material charges.
+3. Documentation: the documentation for the Software supplied by Company to assist its
+customers in the use of the Software.
+4. Licensee: (a) the company or other legal entity on behalf of which this Agreement is signed, if
+the Agreement is signed on behalf of such an entity (e.g., by an employee, independent
+contractor, or other authorized representative), or (b) if there is no such entity, the individual
+who signs this Agreement. For clarification, “Licensee” refers only to a single, specifically
+identified legal entity or individual, and does not include any subsidiary or affiliate of any such
+legal entity or individual or any other related person.
+5. License Term: the period of time in which Licensee shall be entitled to use the Software and
+Documentation.
+6. Models: all Ultralytics YOLO models, which include pre-trained computer vision models
+provided by the Company or those trained or developed by the Licensee using the Company's
+Software during the License Term.
+7. Services: the Software Updates and support and any consulting services provided by the
+Company pursuant to this Agreement.
+8. Service Level Agreement: company shall provide a Service Level Agreement (SLA) to
+Licensee under a separate agreement. The terms and conditions of the SLA will be outlined in
+the separate agreement, including the scope of services, service levels, and fees.
+9. Software: This term refers to the complete Ultralytics YOLO source code portfolio, which
+encompasses existing versions such as YOLOv5 and YOLOv8, as well as any future YOLO
+models that Ultralytics may release during the License Term. This also includes:
+• Pre-trained Models
+• Supporting Documentation
+• Subsequent Modifications: This entails enhancements, upgrades, new features, bug
+fixes, and repairs.
+All related software products, and any future software products, are maintained at the
+Ultralytics GitHub Organization at https://github.com/ultralytics/. These are provided by the
+Company to the Licensee during the License Term.
+10. Support: assistance provided by the Company to the Licensee for troubleshooting issues and
+resolving bugs related to the Software during the License Term.
+1. Community Support. Licensee will have access to the Company's online community.
+Community support will provide Licensee with access to information, best practices, and
+resources to assist in the use and implementation of the Software.
+2. Basic Support. Company will provide communication tools to enable Licensee to
+communicate efficiently with the Company during the License Term. Basic support is
+provided as a convenience to Licensee and is not a guarantee of response time or
+resolution.
+2. Right to Use Software. Company grants Licensee a non-exclusive, non-transferable license to
+use the Software, as well as the accompanying Documentation, during the License Term.
+1. Licensee will hold the right to use the Software for any purpose, including commercial and forprofit purposes.
+2. Licensee's subcontractors, consultants, and vendors will also hold the right to use the Software
+for purposes of developing or deploying Licensee's products or services.
+3. Licensee will have the ability to make and distribute an unlimited number of commercial, forprofit products and services containing the Software mentioned above.
+4. Licensee shall own all rights, title and interest in and to Software modifications they make and
+any Models that they train with the modified or unmodified Software. Ultralytics shall have no
+rights in or to such Licensee-trained Models or Software modifications.
+3. Restrictions on Use of Software. Except as expressly permitted in this Agreement, Licensee
+shall not, and shall not permit any third party to:
+1. Sublicense, resell, or otherwise transfer the license or any portion thereof to any third party,
+including but not limited to any subsidiaries or the affiliates of Licensee.
+2. Alter or remove any notices in the Software or within the Documentation included with said
+Software.
+Except as otherwise set forth in this Agreement, all Software included in this Agreement as well as all
+Documentation included with said Software is provided in an “as is” condition.
+4. Software Updates and Support. Company will provide Licensee access to the Software updates
+and Support during the License Term at no additional fee:
+1. Licensee will have access to Basic Support during the License Term at no additional fee.
+2. Company will conduct one (1) yearly update meeting. The date and time of the meeting will be
+mutually agreed upon by the Company and the Licensee.
+3. Company may provide a Service Level Agreement (SLA) and Consulting Services to Licensee
+under separate agreement(s).
+5. Payment Fees. In consideration of the license granted by the Company under this Agreement,
+Licensee agrees to pay the Company the Annual Fee, plus any applicable taxes, for the Software
+provided under this Agreement. The Annual Fee will be decided thirty (30) days before each renewal
+date, as specified in the Definitions section. Payment shall be due within thirty (30) days of the
+Effective Date, after which a late fee of one and a half percent (1.5%) is applied.
+6. Term and Termination. This Agreement will begin on the Effective Date for a period of one (1)
+year, and will be automatically renewed for one (1) year terms (the initial term and all renewal terms
+collectively being the “License Term”) and charged the Annual Fee, unless either Party provides a
+written notice of non-renewal at least sixty (60) days before the end of the current License Term.
+Licensee’s credit card account (or other payment method account) will be charged without further
+authorization from Licensee, absent the aforementioned written notice of non-renewal.
+Notwithstanding the foregoing, the Company reserves the right to terminate this Agreement at any
+time if the Licensee fails to comply with any of the terms and conditions of this Agreement, and such
+failure is not cured within thirty (30) days of receipt of written notice from the Company.
+In the event that the Licensee does not renew the license upon the termination or expiration of this
+Agreement, the following provisions shall apply:
+1. Sold Products and Services: Products and services sold or provided by the Licensee during
+the License Term that incorporate or utilize the Software will retain their license rights under
+the terms of this Agreement. This ensures that the end-users of such products and services
+can continue using the Software without any disruption and can continue to receive
+maintenance and support by Licensee.
+2. Unsold Products and Unused Services: For any unsold products or unused services
+incorporating or utilizing the Software at the end of the License Term, the Licensee is required
+to cease distribution, offering, and usage of the Software in those products or services, unless
+otherwise agreed upon between the parties in writing.
+3. Internal Products and Services: For any products or services incorporating or utilizing the
+Software that were used internally by the Licensee during the License Term, the Licensee
+must archive such products or services and cease usage of the Software in those products or
+services upon the termination or expiration of this Agreement, unless otherwise agreed upon
+between the parties in writing.
+7. Ownership. Ownership of the Software and Documentation, including all related copyright, patent,
+trade secret and other proprietary rights, are and will remain the exclusive property of Company.
+Licensee retains ownership of any custom versions or modifications of the Software made by
+Licensee, as well as any custom trained Models created by Licensee using the Software. Company
+reserves all rights not expressly granted by it to Licensee under this Agreement. There are no implied
+rights.
+8. Confidentiality. Parties agree to protect each other's confidential information using no less than
+reasonable care and to avoid disclosure of any confidential information. To the extent either Party is
+required by law to disclose the other Party's confidential information, the disclosing Party shall make
+such disclosure, provided that it promptly notifies the other Party of such requirement prior to
+disclosure (to the extent permitted by law), and reasonably cooperates, at its own expense, regarding
+efforts to avoid and limit disclosure. Upon the reasonable request of either Party, the other Party will
+either return, delete, or destroy all confidential information of the requesting Party and certify the
+same.
+9. Limitation of Liability. Excluding a breach of this Agreement, either Party shall not be liable to the
+other Party for any indirect, special, or consequential damages or lost profits arising out of or related
+to this Agreement. Each Party’s total, aggregate liability to the other Party arising out of or in
+connection with this Agreement, whether in contract, tort (including negligence) equity or other legal
+ground, shall not exceed the fees paid or payable by Licensee under this Agreement. The limitations
+of liability set forth in this Section shall not apply to cases of gross negligence, willful misconduct, or
+any other exceptions as required by applicable law.
+10. Indemnification and Legal Compliance. Company represents and warrants that, to the best of
+its knowledge, the Software and Documentation provided to Licensee hereunder do not infringe any
+intellectual property rights or other rights of any third party. In the event of any claim, suit, or
+proceeding against Licensee arising out of an alleged infringement of any intellectual property rights
+or other rights of any third party, Company shall, at its sole expense, defend or settle such claim, suit,
+or proceeding and indemnify and hold harmless Licensee against any damages and costs awarded
+therein, provided that Licensee promptly notifies Company in writing of any such claim, suit, or
+proceeding and provides reasonable cooperation in the defense thereof. This indemnity shall not
+apply to any claim to the extent it arises from modifications made to the Software or Documentation
+by Licensee or a third party.
+Both Parties agree to defend, indemnify, and hold harmless the other party from and against any and
+all damages, injunctive relief, claims, judgments, liabilities, fines, costs, expenses, penalties, or
+losses arising out of any third-party claim or action arising out of any breach by that party of any
+provision of this Agreement. This indemnification obligation shall survive the termination or expiration
+of this Agreement.
+11. Assignment. Neither Party may assign this Agreement, or the rights and obligations herein, to
+any third party without the prior written consent of the other Party, which consent shall not be
+unreasonably withheld or delayed. In the event of assignment, this Agreement is binding on the
+parties’ respective successors and assigns. Notwithstanding the foregoing, each Party is permitted to
+assign without consent or notice obligations to any affiliate, or in the event of the sale of all or
+substantially all of its assets, merger, acquisition, corporate reorganization, change of control, or
+other similar transaction involving such Party (regardless of whether or not such Party is the surviving
+entity).
+12. Severability. If any term, clause or provision herein is held invalid or unenforceable by a court of
+competent jurisdiction, such invalidity shall not affect the validity or operation of any other term,
+clause or provision.
+13. Status. The parties’ status hereunder is that of independent contractors and not an employee or
+agent of the other. Each Party is an independent business and responsible for their own costs and
+expenses, including, those relating to federal, state, and local income taxes, unemployment taxes
+and workers’ compensation, liability insurance, and including the filing of all returns and reports and
+the payment of all assessments, taxes and other sums required of their business.
+14. Waiver. The waiver of either Party of any breach or failure to enforce any of the terms and
+conditions of this Agreement at any time shall not in any way affect, limit, or waive such Party’s right
+thereafter to enforce and compel strict compliance with every term and condition of this Agreement.
+15. Governing Law and Jurisdiction. This Agreement shall be governed by and construed in
+accordance with the substantive laws of the State of Delaware in the United States without regard to
+conflict of laws and all disputes arising under or relating to this Agreement shall be brought and
+resolved solely and exclusively in the State Court located in Delaware.
+16. No Limitation. At any time both Parties may contract without limitation with other entities that
+provide services similar to those to be provided by Company to Licensee.
+17. Final Agreement. This Agreement terminates and supersedes all prior understandings or
+agreements on the subject matter hereof. This Agreement may be modified only by a further writing
+that is duly executed by both parties.
+IN WITNESS whereof, the Parties have caused this Agreement to be executed by their duly
+authorized representatives as of the Effective Date.
+[Sender.Company] [Licensee.Company]
+[Sender.FirstName] [Sender.LastName],
+[Sender.Title]
+[Licensee.FirstName] [Licensee.LastName]
+[Licensee.Title]
